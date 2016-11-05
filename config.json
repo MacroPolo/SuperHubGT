@@ -1,0 +1,19 @@
+{
+  "logs": {
+    "log_directory": "/var/log/superhubgt/",
+    "www_directory": "/var/www/superhubgt/",
+    "data_retention": 7
+  },
+  "superhub": {
+    "ip_address": "192.168.0.1",
+    "password": "password123"
+  },
+  "bandwidth": {
+    "interval": 60,
+    "enable_icmp": true,
+    "icmp_id": "1234567890abcd"
+  },
+  "downstream": {
+    "interval": 60
+  }
+}
