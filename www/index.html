@@ -1,0 +1,482 @@
+<html>
+    
+    <head>
+        <meta charset="utf-8">
+        <script type="text/javascript" src="/js/jquery-3.1.1.min.js"></script>
+        <script type="text/javascript" src="/js/highstock.js"></script>
+        <script type="text/javascript" src="/js/exporting.js"></script>
+        <script type="text/javascript" src="/js/data.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans">
+    </head>
+    
+    <script>
+    $(function () {
+
+    $.get('bandwidth.csv', function (data) {
+        // Create the chart
+        $('#container').highcharts('StockChart', {
+
+            title: {
+                text: 'Download/Upload Throughput (Mbit/s)',
+                useHTML: true,
+                style: {
+                    fontWeight: 'bold',
+                    color: '#428BCA'
+                }
+            },
+            
+            subtitle: {
+                text: 'One minute average',
+                useHTML: true,
+                style: {
+                    fontWeight: 'bold'
+                }
+            },
+            
+            xAxis: {
+                type: 'datetime'
+            },
+            
+            yAxis: {
+                title: {
+                    text: 'Throughput (Mbit/s)'
+                }
+            },
+            
+            tooltip: {
+                valueDecimals: 2,
+                valueSuffix: ' Mbit/s'
+            },
+            
+            legend: {
+                enabled: true,
+            },
+            
+            rangeSelector: {
+                allButtonsEnabled: true,
+                buttons: [{
+                    type: 'hour',
+                    count: 1,
+                    text: '1 Hour',
+                }, {
+                    type: 'hour',
+                    count: 12,
+                    text: '12 Hour',
+                }, {
+                    type: 'day',
+                    count: 1,
+                    text: 'Day',
+                }, {
+                    type: 'week',
+                    count: 1,
+                    text: 'Week',
+                }, {
+                    type: 'month',
+                    count: 1,
+                    text: 'Month',
+                }, {
+                    type: 'all',
+                    text: 'All',
+                }],
+                buttonTheme: {
+                    width: 60
+                },
+                selected : 0
+            },
+            
+            navigator: {
+                enabled: true
+            },
+            
+            data: {
+                csv: data,
+                startColumn: 0,
+                endColumn: 2
+                }
+            });
+    });
+    });
+
+    </script>
+
+    <script>
+    $(function () {
+
+    $.get('downstream_power.csv', function (data) {
+        // Create the chart
+        $('#container2').highcharts('StockChart', {
+
+            title: {
+                text: 'Downstream Power Levels (dBmV)',
+                useHTML: true,
+                style: {
+                    fontWeight: 'bold',
+                    color: '#428BCA'
+                }
+            },
+            
+            subtitle: {
+                text: 'Acceptable Power: -5 to +10 dBmv || Preferred Power: -3 to +8 dBmv',
+                useHTML: true,
+                style: {
+                    fontWeight: 'bold'
+                }
+            },
+
+            data: {
+                csv: data
+            },
+            
+            legend: {
+                enabled: true,
+            },
+            
+            tooltip: {
+                valueDecimals: 2,
+                valueSuffix: ' dBmv'
+            },
+            
+            xAxis: {
+                type: 'datetime'
+            },
+            
+            yAxis: { 
+                title: {
+                    text: 'Power (dBmv)'
+                },
+                
+                plotBands: [{ // Suboptimal
+                    from: -3.0,
+                    to: -5.0,
+                    color: 'rgba(255, 255, 0, 0.2)',
+                    label: {
+                        text: 'Suboptimal Power',
+                        verticalAlign: 'top',
+                        y: 20,
+                        align: 'center',
+                        style: {
+                            color: 'orange',
+                            fontWeight: 'bold'
+                            }
+                        }
+                    }, { // Suboptimal
+                    from: 8.0,
+                    to: 10.0,
+                    color: 'rgba(255, 255, 0, 0.2)',
+                    label: {
+                        text: 'Suboptimal Power',
+                        verticalAlign: 'top',
+                        y: 20,
+                        align: 'center',
+                        style: {
+                            color: 'orange',
+                            fontWeight: 'bold'
+                            }
+                        }
+                    }, { // Out of Range
+                    from: -100,
+                    to: -5,
+                    color: 'rgba(255, 0, 0, 0.2)',
+                    label: {
+                        text: 'Out of Range Power',
+                        verticalAlign: 'top',
+                        y: 20,
+                        align: 'center',
+                        style: {
+                            color: 'red',
+                            fontWeight: 'bold'
+                            }
+                        }
+                    }, { // Out of Range
+                    from: 10.0,
+                    to: 100.0,
+                    color: 'rgba(255, 0, 0, 0.2)',
+                    label: {
+                        text: 'Out of Range Power',
+                        verticalAlign: 'top',
+                        y: 20,
+                        align: 'center',
+                        style: {
+                            color: 'red',
+                            fontWeight: 'bold'
+                            }
+                        }
+                    }]
+            },
+            
+            rangeSelector: {
+                allButtonsEnabled: true,
+                buttons: [{
+                    type: 'day',
+                    count: 1,
+                    text: 'Day',
+                }, {
+                    type: 'week',
+                    count: 1,
+                    text: 'Week',
+                }, {
+                    type: 'month',
+                    count: 1,
+                    text: 'Month',
+                }, {
+                    type: 'all',
+                    text: 'All',
+                }],
+                buttonTheme: {
+                    width: 60
+                },
+                selected : 0
+            }
+        });
+    });
+    });
+
+    </script>
+
+    <script>
+    $(function () {
+
+    $.get('downstream_rx.csv', function (data) {
+        // Create the chart
+        $('#container3').highcharts('StockChart', {
+
+            title: {
+                text: 'Downstream RxMER/SNR Levels (dB)',
+                useHTML: true,
+                style: {
+                    fontWeight: 'bold',
+                    color: '#428BCA'
+                }
+            },
+            
+            subtitle: {
+                text: 'Acceptable SNR: ≥ 32 dB || Optimal SNR: ≥ 34.5 dB',
+                useHTML: true,
+                style: {
+                    fontWeight: 'bold'
+                }
+            },
+
+            data: {
+                csv: data
+            },
+            
+            legend: {
+                enabled: true,
+            },
+            
+            tooltip: {
+                valueDecimals: 2,
+                valueSuffix: ' dB'
+            },
+            
+            xAxis: {
+                type: 'datetime'
+            },
+            
+            yAxis: {
+                title: {
+                    text: 'RxMER/SNR (dB)'
+                },
+                plotBands: [{ // Suboptimal
+                    from: 32.0,
+                    to: 34.5,
+                    color: 'rgba(255, 255, 0, 0.2)',
+                    label: {
+                        text: 'Suboptimal SNR',
+                        verticalAlign: 'top',
+                        y: 20,
+                        align: 'center',
+                        style: {
+                            color: 'orange',
+                            fontWeight: 'bold',
+                            }
+                        }
+                    }, { // Out of Range
+                    from: 0.0,
+                    to: 32.0,
+                    color: 'rgba(255, 0, 0, 0.2)',
+                    label: {
+                        text: 'Out of Range SNR',
+                        verticalAlign: 'top',
+                        y: 20,
+                        align: 'center',
+                        style: {
+                            color: 'red',
+                            fontWeight: 'bold'
+                            }
+                        }
+                    }]
+            },
+            
+            rangeSelector: {
+                allButtonsEnabled: true,
+                buttons: [{
+                    type: 'day',
+                    count: 1,
+                    text: 'Day',
+                }, {
+                    type: 'week',
+                    count: 1,
+                    text: 'Week',
+                }, {
+                    type: 'month',
+                    count: 1,
+                    text: 'Month',
+                }, {
+                    type: 'all',
+                    text: 'All',
+                }],
+                buttonTheme: {
+                    width: 60
+                },
+                selected : 0
+            }
+        });
+    });
+    });
+
+    </script>
+    
+    <script>
+    $(function () {
+
+    $.get('downstream_post_errors.csv', function (data) {
+        // Create the chart
+        $('#container4').highcharts('StockChart', {
+
+            title: {
+                text: 'Post RS Errors',
+                useHTML: true,
+                style: {
+                    fontWeight: 'bold',
+                    color: '#428BCA'
+                }
+            },
+            
+            data: {
+                csv: data
+            },
+            
+            legend: {
+                enabled: true,
+            },
+            
+            tooltip: {
+                valueDecimals: 0,
+            },
+            
+            xAxis: {
+                type: 'datetime'
+            },
+            
+            yAxis: {
+                title: {
+                    text: 'Error Count'
+                },
+            },
+            
+            rangeSelector: {
+                allButtonsEnabled: true,
+                buttons: [{
+                    type: 'day',
+                    count: 1,
+                    text: 'Day',
+                }, {
+                    type: 'week',
+                    count: 1,
+                    text: 'Week',
+                }, {
+                    type: 'month',
+                    count: 1,
+                    text: 'Month',
+                }, {
+                    type: 'all',
+                    text: 'All',
+                }],
+                buttonTheme: {
+                    width: 60
+                },
+                selected : 0
+            }
+        });
+    });
+    });
+
+    </script>
+
+    <style>
+        
+        body {
+            background-color: #B7B7B7;
+            font-family: 'Open Sans', sans-serif;
+        }
+        
+        h1 {
+            color: #333;
+            text-align: center;
+            font-size: 60px; 
+            margin-bottom: 0px;
+        }
+        
+        h2 {
+            text-align: center;
+            font-size: 14px;
+            font-style: normal;
+            color: #333;
+        }
+        
+        a {
+            transition: color .4s;
+            color: #428BCA;
+        }
+
+        a:link,
+        a:visited { color: #428BCA; }
+        a:hover   { color: #346FA1; }
+        a:active  {
+          transition: color .3s;
+          color: #007BE6;
+        }
+
+.link { text-decoration: none; }
+        
+        .highchart {
+            height: 600px;
+            width: 96%;
+            min-width: 310px;
+            margin: 0 auto;
+            margin-top: 50px;
+            box-shadow: 10px 10px 5px #888888;
+        }
+        
+        #icmp {
+            display: flex;
+            justify-content: center;
+            margin-top: 50px;
+            
+        }
+        
+        #png {
+            border-radius: 25px;
+            background: white;
+            padding: 10px;
+            box-shadow: 10px 10px 5px #888888;
+        }
+        
+    </style>
+
+    <body>
+    <h1>Super Hub Graphing Tool</h1>
+    <h2>Created by <a href="https://github.com/MacroPolo">MacroPolo</a>. Powered by <a href="http://www.highcharts.com/">Highcharts</a>.</h2>
+    <div id="container" class="highchart"></div>
+    <div id="container2" class="highchart"></div>
+    <div id="container3" class="highchart"></div>
+    <div id="container4" class="highchart"></div>
+    <div id="icmp">
+        <p><img id="png" src="icmp.png"></p>
+    </div>
+    
+    </body>
+    
+</html>
