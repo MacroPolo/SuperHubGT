@@ -12,15 +12,10 @@ for data, add it to csv files and then through the use of
 [Highstock](http://www.highcharts.com/), the results and graphed and displayed 
 on a webpage.
 
-I have uploaded all of the code to [Github](https://github.com/MacroPolo/SuperHubGT) 
-and you can see a demo of the graphs 
-[here](http://slashtwentyfour.net/demo/superhubgt/graphs.html).
-
-![SuperHubGT_Example](https://macropolo.github.io/img/2016-11-02-superhub_gt/superhubgt_preview.png "SuperHubGT_Example")
+![SuperHubGT_Example](superhubgt_preview.png "SuperHubGT_Example")
 
 For anyone interested in setting up this tool for themselves, the instructions 
-below should walk you through everything you need, provided you have at least 
-a basic grasp of Linux systems administration.
+below should walk you through everything you need.
 
 # Prerequisites 
 
@@ -32,9 +27,7 @@ be using `Ubuntu Server 16.04` for this guide.
 include a basic guide on how to configure that.
 * SuperHub 2 (Super Hub VMDG490). I have only tested this code on a Superhub 2 
 with 8 Downstream channels. I do not know whether the UI is different on 
-different SuperHub models. Perhaps if someone is able to test and make a 
-pull request for code changes I can add SuperHub version detection logic into 
-the scripts.
+different SuperHub models.
 
 **Note**: The graphs are generated through the fantastic Javascript library 
 provided by [Highcharts](https://shop.highsoft.com/highstock). Highcharts is 
@@ -241,9 +234,7 @@ drwxr-xr-x 2 root root   4096 Nov  5 04:50 js/
 
 Refreshing your web browser once more should now show the graphs being generated!
 
-Hopefully the above steps have been detailed enough to get you up and running with the SuperHub Graphing Tool, however I will be happy to answer any questions or help out with configuration. Please post in the comments below or email <a href="mailto:contact@slashtwentyfour.net">contact@slashtwentyfour.net</a>.
-
-Lastly, although I have not tested these scripts in a Windows environemnt, I 
+Lastly, although I have not tested these scripts in a Windows environment, I 
 don't think it would take too much time to alter them to work. It should also 
 be possible to fairly easily add additional graphs for other parts of the 
 SuperHub UI which you wish to graph.
